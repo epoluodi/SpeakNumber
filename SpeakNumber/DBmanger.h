@@ -27,4 +27,5 @@
 -(void)addData:(NSString *)var value:(NSString *)value group:(NSString *)group;
 -(NSArray *)getDefaultConfigdata;
 -(void)updateConfig:(NSString *)var value:(NSString *)value;
+-(BOOL)checkConfigData:(NSString *)groupname;
 @end

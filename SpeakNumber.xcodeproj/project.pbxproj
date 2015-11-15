@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7B8365D91BF042AA0034728E /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8365D81BF042AA0034728E /* Config.m */; };
 		7B84BE571BEA5D270091FC7D /* PreSvaeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B84BE561BEA5D270091FC7D /* PreSvaeView.m */; };
+		7B8FA0A01BF8B2D500F72934 /* numberfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8FA09F1BF8ACB400F72934 /* numberfont.ttf */; };
 		7BBA93031BE3BE37001F8F31 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BBA93021BE3BE37001F8F31 /* setting.png */; };
 		7BBA93081BE511EE001F8F31 /* settingdb.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA93061BE511EE001F8F31 /* settingdb.xcdatamodeld */; };
 		7BBA930B1BE51274001F8F31 /* DBmanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA930A1BE51274001F8F31 /* DBmanger.m */; };
@@ -46,6 +47,7 @@
 		7B8365D81BF042AA0034728E /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		7B84BE551BEA5D270091FC7D /* PreSvaeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreSvaeView.h; sourceTree = "<group>"; };
 		7B84BE561BEA5D270091FC7D /* PreSvaeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreSvaeView.m; sourceTree = "<group>"; };
+		7B8FA09F1BF8ACB400F72934 /* numberfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = numberfont.ttf; sourceTree = "<group>"; };
 		7BBA93021BE3BE37001F8F31 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		7BBA93071BE511EE001F8F31 /* settingdb.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = settingdb.xcdatamodel; sourceTree = "<group>"; };
 		7BBA93091BE51274001F8F31 /* DBmanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBmanger.h; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		7BBBFC801BE3428D00EF539B /* SpeakNumber */ = {
 			isa = PBXGroup;
 			children = (
+				7B8FA09F1BF8ACB400F72934 /* numberfont.ttf */,
 				7BBA931A1BE65470001F8F31 /* ASValuePopUpView.h */,
 				7BBA931B1BE65470001F8F31 /* ASValuePopUpView.m */,
 				7BBA931C1BE65470001F8F31 /* ASValueTrackingSlider.h */,
@@ -217,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8FA0A01BF8B2D500F72934 /* numberfont.ttf in Resources */,
 				7BBA93031BE3BE37001F8F31 /* setting.png in Resources */,
 				7BBBFC911BE3428E00EF539B /* LaunchScreen.storyboard in Resources */,
 				7BBBFC8E1BE3428E00EF539B /* Assets.xcassets in Resources */,

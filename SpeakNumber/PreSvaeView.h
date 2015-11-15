@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "DBmanger.h"
 #import "AppDelegate.h"
-@interface PreSvaeView : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface PreSvaeView : UIViewController<UITableViewDataSource,
+UITableViewDelegate>
 {
     UIBarButtonItem *rightbtn;
     DBmanger *db;
     UITextField *textname;
     AppDelegate *app;
+    NSArray *configarr;
     
 }
 @property (weak, nonatomic) IBOutlet UINavigationItem *navtitle;

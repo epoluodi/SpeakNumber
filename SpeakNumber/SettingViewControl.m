@@ -27,7 +27,10 @@
     
     table.delegate= self;
     table.dataSource = self;
-   
+    table.backgroundColor = [UIColor clearColor];
+    UIImageView *backview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back"]];
+    backview.frame = self.view.frame;
+    [self.view insertSubview:backview atIndex:0];
     
     numberformat = [[NSNumberFormatter alloc] init];
     
@@ -36,6 +39,10 @@
     dispatch_queue_t mainQ = dispatch_get_main_queue();
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+
+
+    
+ 
     
     dispatch_after(popTime, mainQ, ^{
         [UIView animateWithDuration:0.5 animations:^{
@@ -66,6 +73,11 @@
 
 }
 
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
+}
 -(void)rightclick
 {
     [self performSegueWithIdentifier:@"settingmanger" sender:self];
@@ -118,17 +130,18 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             slider1 = [[ASValueTrackingSlider alloc] init];
+            
             slider1.maximumValue=5;
             slider1.minimumValue=1;
             slider1.value=1;
             slider1.tag = 1;
             slider1.dataSource = self;
             slider1.frame = CGRectMake(60, 50, [PublicCommon GetALLScreen].size.width - 120, 50);
-            slider1.popUpViewColor = [UIColor orangeColor];
+            slider1.popUpViewColor = [UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             [cell.contentView addSubview:slider1];
             txttitle1 = [[UILabel alloc] init];
             txttitle1.text=[NSString stringWithFormat:@"报数间隔: 2 秒"];
-            txttitle1.textColor =[UIColor orangeColor];
+            txttitle1.textColor =[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             txttitle1.frame = CGRectMake(20  , slider1.frame.origin.y + 30+10, [PublicCommon GetALLScreen].size.width -40, 50);
             txttitle1.textAlignment = NSTextAlignmentCenter;
             [cell.contentView addSubview:txttitle1];
@@ -140,17 +153,18 @@
             cell = [[UITableViewCell alloc] init];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             slider2 = [[ASValueTrackingSlider alloc] init];
+            slider2.popUpViewAnimatedColors = @[[UIColor blueColor]];
             slider2.maximumValue=10;
             slider2.minimumValue=1;
             slider2.value=1;
             slider2.tag = 2;
             slider2.dataSource = self;
             slider2.frame = CGRectMake(60, 50, [PublicCommon GetALLScreen].size.width - 120, 50);
-            slider2.popUpViewColor = [UIColor orangeColor];
+            slider2.popUpViewColor = [UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             [cell.contentView addSubview:slider2];
             txttitle2 = [[UILabel alloc] init];
             txttitle2.text=[NSString stringWithFormat:@"运动：: 4 组"];
-            txttitle2.textColor =[UIColor orangeColor];
+            txttitle2.textColor =[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             txttitle2.frame = CGRectMake(20  , slider2.frame.origin.y + 30+10, [PublicCommon GetALLScreen].size.width -40, 50);
             txttitle2.textAlignment = NSTextAlignmentCenter;
             [cell.contentView addSubview:txttitle2];
@@ -165,11 +179,11 @@
             slider3.tag = 3;
             slider3.dataSource = self;
             slider3.frame = CGRectMake(60, 50, [PublicCommon GetALLScreen].size.width - 120, 50);
-            slider3.popUpViewColor = [UIColor orangeColor];
+            slider3.popUpViewColor = [UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             [cell.contentView addSubview:slider3];
             txttitle3 = [[UILabel alloc] init];
             txttitle3.text=[NSString stringWithFormat:@"每组数量：: 10 个"];
-            txttitle3.textColor =[UIColor orangeColor];
+            txttitle3.textColor =[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             txttitle3.frame = CGRectMake(20  , slider3.frame.origin.y + 30+10, [PublicCommon GetALLScreen].size.width -40, 50);
             txttitle3.textAlignment = NSTextAlignmentCenter;
             [cell.contentView addSubview:txttitle3];
@@ -184,11 +198,11 @@
             slider4.tag = 4;
             slider4.dataSource = self;
             slider4.frame = CGRectMake(60, 50, [PublicCommon GetALLScreen].size.width - 120, 50);
-            slider4.popUpViewColor = [UIColor orangeColor];
+            slider4.popUpViewColor = [UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             [cell.contentView addSubview:slider4];
             txttitle4 = [[UILabel alloc] init];
             txttitle4.text=[NSString stringWithFormat:@"中间休息时间: 30 秒"];
-            txttitle4.textColor =[UIColor orangeColor];
+            txttitle4.textColor =[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             txttitle4.frame = CGRectMake(20  , slider4.frame.origin.y + 30+10, [PublicCommon GetALLScreen].size.width -40, 50);
             txttitle4.textAlignment = NSTextAlignmentCenter;
             [cell.contentView addSubview:txttitle4];

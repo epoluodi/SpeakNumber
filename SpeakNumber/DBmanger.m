@@ -75,6 +75,24 @@
     return arr;
 }
 
+
+-(NSArray *)getDefaultConfigdata:(NSString *)group
+{
+    NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Config"];
+    
+    //排序
+    //    NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"stockcode" ascending:NO];
+    //    fetch.sortDescriptors=@[sort];
+    //加入查询条件 age>20
+    fetch.predicate=[NSPredicate predicateWithFormat:@"group=%@",group];
+    
+    //    fetch.predicate=[NSPredicate predicateWithFormat:@"name like %@",@"*cb1*"];
+    NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
+    
+    return arr;
+}
+
+
 -(BOOL)checkConfigData:(NSString *)groupname
 {
     NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Config"];
@@ -87,21 +105,44 @@
     
     //    fetch.predicate=[NSPredicate predicateWithFormat:@"name like %@",@"*cb1*"];
     NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
+
     if ([arr count] > 0)
         return NO;
     return YES;
 }
 
 
--(NSArray *)getConfigdataForGroup{
+-(NSArray *)getConfigdataForALLGroup
+{
+    NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Config"];
+    
+    //排序
+        NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"group" ascending:NO];
+        fetch.sortDescriptors=@[sort];
+    //加入查询条件 age>20
+//    fetch.predicate=[NSPredicate predicateWithFormat:@"group <> %@",@"默认"];
+    fetch.propertiesToFetch = @[@"group"];
+    fetch.propertiesToGroupBy = @[@"group"];
+    [fetch setResultType:NSDictionaryResultType ];
+    //    fetch.predicate=[NSPredicate predicateWithFormat:@"name like %@",@"*cb1*"];
+    NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
+    
+    return arr;
+}
+
+
+-(NSArray *)getConfigdataForGroup
+{
     NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Config"];
     
     //排序
     //    NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"stockcode" ascending:NO];
     //    fetch.sortDescriptors=@[sort];
     //加入查询条件 age>20
-//    fetch.predicate=[NSPredicate predicateWithFormat:@"group=%@",@"默认"];
+    fetch.predicate=[NSPredicate predicateWithFormat:@"group <> %@",@"默认"];
+    fetch.propertiesToFetch = @[@"group"];
     fetch.propertiesToGroupBy = @[@"group"];
+    [fetch setResultType:NSDictionaryResultType ];
     //    fetch.predicate=[NSPredicate predicateWithFormat:@"name like %@",@"*cb1*"];
     NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
     
@@ -187,27 +228,27 @@
 //    return arr;
 //}
 //
-//
-//-(void)deletestock:(NSString *)stockcode
-//{
-//    
-//    NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Stock"];
-//    
-//    //排序
-//    //    NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"stockcode" ascending:NO];
-//    //    fetch.sortDescriptors=@[sort];
-//    //加入查询条件 age>20
-//    fetch.predicate=[NSPredicate predicateWithFormat:@"stockcode=%@",stockcode];
-//    
-//    //    fetch.predicate=[NSPredicate predicateWithFormat:@"name like %@",@"*cb1*"];
-//    NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
-//    for (Stock *obj in arr)
-//    {
-//        [mangedcontext deleteObject:obj];
-//    }
-//    [mangedcontext save:nil];
-//    return ;
-//}
+
+-(void)delconfig:(NSString *)group
+{
+    
+    NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Config"];
+    
+    //排序
+    //    NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"stockcode" ascending:NO];
+    //    fetch.sortDescriptors=@[sort];
+    //加入查询条件 age>20
+    fetch.predicate=[NSPredicate predicateWithFormat:@"group=%@",group];
+    
+    //    fetch.predicate=[NSPredicate predicateWithFormat:@"name like %@",@"*cb1*"];
+    NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
+    for (Config *obj in arr)
+    {
+        [mangedcontext deleteObject:obj];
+    }
+    [mangedcontext save:nil];
+    return ;
+}
 //
 //
 //

@@ -26,6 +26,10 @@
 -(instancetype)initDB;
 -(void)addData:(NSString *)var value:(NSString *)value group:(NSString *)group;
 -(NSArray *)getDefaultConfigdata;
+-(NSArray *)getDefaultConfigdata:(NSString *)group;
 -(void)updateConfig:(NSString *)var value:(NSString *)value;
 -(BOOL)checkConfigData:(NSString *)groupname;
+-(NSArray *)getConfigdataForGroup;
+-(void)delconfig:(NSString *)group;
+-(NSArray *)getConfigdataForALLGroup;
 @end

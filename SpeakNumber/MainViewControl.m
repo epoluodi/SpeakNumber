@@ -40,7 +40,7 @@
     
     numberlayer = [[CATextLayer  alloc] init];
     numberlayer.font = (CFTypeRef)CFBridgingRetain(font);
-    numberlayer.fontSize = 124;
+    numberlayer.fontSize = 90;
     numberlayer.string = @"1";
 
     numberlayer.foregroundColor = [[UIColor whiteColor] CGColor];
@@ -54,7 +54,7 @@
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 
-    config_now  = malloc(sizeof(settingConfig));
+
     
     
     [self updateTableLayout];
@@ -64,9 +64,15 @@
     [self displaytableinit];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (config_now == NULL)
+        config_now  = malloc(sizeof(settingConfig));
+}
 -(void)viewDidDisappear:(BOOL)animated
 {
     free(config_now);
+    config_now=NULL;
 }
 
 -(void)displaytableinit
@@ -94,7 +100,10 @@
 {
     cell.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
-    cell.selectedBackgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+//    cell.selectedBackgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+    cell.selectedBackgroundView.layer.borderWidth =1;
+    cell.selectedBackgroundView.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,12 +126,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (celllabel){
+        celllabel.textColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
+        celllabel = nil;
+    }
     int index = (int)indexPath.row;
-    [self setindexConfig:&index];
-    
-    
-    
-    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.textColor = [UIColor yellowColor];
+    celllabel = cell.textLabel;
+    [self setindexConfig:&index];    
 }
 
 
@@ -134,19 +146,20 @@
     NSString *str = [d objectForKey:@"group"];
     
     NSArray *arr = [db getDefaultConfigdata:str];
-    
+    settingConfig sc;
     for (Config *db_c in arr) {
-//        if ([db_c.var isEqualToString:@"speakInterval"])
-//            defaultsettingfoncig.speakInterval = [db_c.value integerValue];
-//        if ([db_c.var isEqualToString:@"groups"])
-//            defaultsettingfoncig.groups = [db_c.value integerValue];
-//        if ([db_c.var isEqualToString:@"groupincount"])
-//            defaultsettingfoncig.groupincount = [db_c.value integerValue];
-//        if ([db_c.var isEqualToString:@"grouprest"])
-//            defaultsettingfoncig.grouprest = [db_c.value integerValue];
-//        if ([db_c.var isEqualToString:@"resttype"])
-//            defaultsettingfoncig.resttype = [db_c.value integerValue];
+        if ([db_c.var isEqualToString:@"speakInterval"])
+            sc.speakInterval = (int)[db_c.value integerValue];
+        if ([db_c.var isEqualToString:@"groups"])
+            sc.groups = (int)[db_c.value integerValue];
+        if ([db_c.var isEqualToString:@"groupincount"])
+            sc.groupincount = (int)[db_c.value integerValue];
+        if ([db_c.var isEqualToString:@"grouprest"])
+            sc.grouprest = (int)[db_c.value integerValue];
+        if ([db_c.var isEqualToString:@"resttype"])
+            sc.resttype = (int)[db_c.value integerValue];
     }
+    memcpy(config_now, &sc, sizeof(settingConfig));
     
 }
 

@@ -20,6 +20,7 @@
     UIFont *font;
     CATextLayer *numberlayer;
     settingConfig *config_now;
+    UILabel *celllabel;
     
 }
 @property (weak, nonatomic) IBOutlet UINavigationItem *navtitle;

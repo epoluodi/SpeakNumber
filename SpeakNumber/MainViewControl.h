@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Common/PublicCommon.h>
 #import "DBmanger.h"
+#import "setting.h"
 
 @interface MainViewControl : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
@@ -18,6 +19,8 @@
     DBmanger *db;
     UIFont *font;
     CATextLayer *numberlayer;
+    settingConfig *config_now;
+    
 }
 @property (weak, nonatomic) IBOutlet UINavigationItem *navtitle;
 @property (weak, nonatomic) IBOutlet UIView *numberview;

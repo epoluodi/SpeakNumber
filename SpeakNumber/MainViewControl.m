@@ -52,11 +52,33 @@
     tableview.delegate = self;
     tableview.dataSource = self;
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+
+    config_now  = malloc(sizeof(settingConfig));
+    
+    
     [self updateTableLayout];
     
     [self initnumberview];
+    
+    [self displaytableinit];
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    free(config_now);
+}
+
+-(void)displaytableinit
+{
+    dispatch_queue_t mainQ = dispatch_get_main_queue();
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+    dispatch_after(popTime, mainQ, ^(void){
+        [tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0 ] animated:YES scrollPosition:UITableViewScrollPositionTop];
+        
+        
+    });
+}
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -74,6 +96,7 @@
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *d = [configgroup objectAtIndex:indexPath.row];
@@ -83,10 +106,48 @@
 
     return  cell;
 }
+
+
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *v = [[UIView alloc] init];
     return v;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int index = (int)indexPath.row;
+    [self setindexConfig:&index];
+    
+    
+    
+    
+}
+
+
+
+-(void)setindexConfig:(int *)index
+{
+    
+    NSDictionary *d = [configgroup objectAtIndex:*index];
+    NSString *str = [d objectForKey:@"group"];
+    
+    NSArray *arr = [db getDefaultConfigdata:str];
+    
+    for (Config *db_c in arr) {
+//        if ([db_c.var isEqualToString:@"speakInterval"])
+//            defaultsettingfoncig.speakInterval = [db_c.value integerValue];
+//        if ([db_c.var isEqualToString:@"groups"])
+//            defaultsettingfoncig.groups = [db_c.value integerValue];
+//        if ([db_c.var isEqualToString:@"groupincount"])
+//            defaultsettingfoncig.groupincount = [db_c.value integerValue];
+//        if ([db_c.var isEqualToString:@"grouprest"])
+//            defaultsettingfoncig.grouprest = [db_c.value integerValue];
+//        if ([db_c.var isEqualToString:@"resttype"])
+//            defaultsettingfoncig.resttype = [db_c.value integerValue];
+    }
+    
 }
 
 -(void)updateTableLayout

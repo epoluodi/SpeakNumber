@@ -96,7 +96,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cQ-5I-TCH">
                                 <rect key="frame" x="49" y="87" width="225" height="225"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cicle" translatesAutoresizingMaskIntoConstraints="NO" id="nLi-Cf-aXh">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cicle" translatesAutoresizingMaskIntoConstraints="NO" id="nLi-Cf-aXh">
                                         <rect key="frame" x="0.0" y="0.0" width="225" height="225"/>
                                         <animations/>
                                     </imageView>
@@ -112,24 +112,36 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fc-ci-wFB">
-                                <rect key="frame" x="125" y="496" width="73" height="52"/>
+                                <rect key="frame" x="131" y="492" width="60" height="60"/>
                                 <animations/>
-                                <color key="backgroundColor" red="1" green="0.89899395069999999" blue="0.75008878690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="njo-rZ-m0v"/>
-                                    <constraint firstAttribute="height" constant="52" id="rv1-hz-NqK"/>
+                                    <constraint firstAttribute="width" constant="60" id="njo-rZ-m0v"/>
+                                    <constraint firstAttribute="height" constant="60" id="rv1-hz-NqK"/>
                                 </constraints>
-                                <state key="normal" title="开始播放 "/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="开始">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickplay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9R1-W7-N00"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="in5-lt-VAU">
-                                <rect key="frame" x="34" y="496" width="73" height="52"/>
+                                <rect key="frame" x="49" y="497" width="50" height="50"/>
                                 <animations/>
-                                <color key="backgroundColor" red="1" green="0.89899395069999999" blue="0.75008878690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="Ggg-Uq-xi5"/>
-                                    <constraint firstAttribute="height" constant="52" id="x3D-qC-Rd8"/>
+                                    <constraint firstAttribute="width" constant="50" id="Ggg-Uq-xi5"/>
+                                    <constraint firstAttribute="height" constant="50" id="x3D-qC-Rd8"/>
                                 </constraints>
-                                <state key="normal" title="结束"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="结束">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickstop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vB0-im-HeG"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PU1-5Y-Xfy">
                                 <rect key="frame" x="94" y="331" width="133" height="29"/>
@@ -139,16 +151,6 @@
                                     <segment title="按组报数"/>
                                 </segments>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfB-tu-C7t">
-                                <rect key="frame" x="216" y="496" width="73" height="52"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="0.89899395069999999" blue="0.75008878690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="MXU-PR-Rkj"/>
-                                    <constraint firstAttribute="height" constant="52" id="dU1-sx-QWm"/>
-                                </constraints>
-                                <state key="normal" title="暂停"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UfV-ev-ENI">
                                 <rect key="frame" x="17" y="376" width="289" height="112"/>
                                 <animations/>
@@ -158,30 +160,50 @@
                                     <constraint firstAttribute="height" constant="112" id="LAH-mE-Ael"/>
                                 </constraints>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfB-tu-C7t">
+                                <rect key="frame" x="224" y="497" width="50" height="50"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="MXU-PR-Rkj"/>
+                                    <constraint firstAttribute="height" constant="50" id="dU1-sx-QWm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="暂停">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickpause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nLm-rK-VDH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="in5-lt-VAU" secondAttribute="bottom" constant="20" id="3se-7A-HBm"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dfB-tu-C7t" secondAttribute="bottom" constant="20" id="6Jy-4s-wnO"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="in5-lt-VAU" secondAttribute="bottom" constant="21" id="3se-7A-HBm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dfB-tu-C7t" secondAttribute="bottom" constant="21" id="6Jy-4s-wnO"/>
                             <constraint firstItem="7cQ-5I-TCH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="1" id="8N9-Zs-Gfh"/>
                             <constraint firstItem="7cQ-5I-TCH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="23" id="8gk-J0-h2u"/>
                             <constraint firstItem="UfV-ev-ENI" firstAttribute="top" secondItem="PU1-5Y-Xfy" secondAttribute="bottom" constant="17" id="OJ5-bO-X5Y"/>
                             <constraint firstItem="2Fc-ci-wFB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="1" id="QMh-ae-M7A"/>
-                            <constraint firstItem="dfB-tu-C7t" firstAttribute="leading" secondItem="2Fc-ci-wFB" secondAttribute="trailing" constant="18" id="RvW-SH-NXO"/>
+                            <constraint firstItem="dfB-tu-C7t" firstAttribute="leading" secondItem="2Fc-ci-wFB" secondAttribute="trailing" constant="33" id="RvW-SH-NXO"/>
                             <constraint firstItem="PU1-5Y-Xfy" firstAttribute="top" secondItem="7cQ-5I-TCH" secondAttribute="bottom" constant="19" id="d3P-Fn-0Lf"/>
                             <constraint firstItem="UfV-ev-ENI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="1.5" id="ig4-Sm-wax"/>
-                            <constraint firstItem="2Fc-ci-wFB" firstAttribute="leading" secondItem="in5-lt-VAU" secondAttribute="trailing" constant="18" id="nJu-JN-KVt"/>
+                            <constraint firstItem="2Fc-ci-wFB" firstAttribute="leading" secondItem="in5-lt-VAU" secondAttribute="trailing" constant="32" id="nJu-JN-KVt"/>
                             <constraint firstItem="PU1-5Y-Xfy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="odS-7s-QkW"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Fc-ci-wFB" secondAttribute="bottom" constant="20" id="voj-mI-xqt"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Fc-ci-wFB" secondAttribute="bottom" constant="16" id="voj-mI-xqt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="b50-sn-do7"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnpause" destination="dfB-tu-C7t" id="rbh-Rs-ZJL"/>
+                        <outlet property="btnplay" destination="2Fc-ci-wFB" id="l6J-Bs-fAh"/>
+                        <outlet property="btnstop" destination="in5-lt-VAU" id="8S5-Jt-P90"/>
                         <outlet property="navtitle" destination="b50-sn-do7" id="bKc-C0-zhO"/>
                         <outlet property="numberimg" destination="nLi-Cf-aXh" id="RHh-NJ-7oY"/>
                         <outlet property="numberview" destination="7cQ-5I-TCH" id="AGQ-q7-t2Q"/>
+                        <outlet property="switchbar" destination="PU1-5Y-Xfy" id="3v6-mY-tcd"/>
                         <outlet property="tableview" destination="UfV-ev-ENI" id="2pl-VT-8ld"/>
                         <segue destination="OVa-9m-Obi" kind="push" identifier="setting" id="nGN-yC-ZX0"/>
                         <segue destination="nVQ-mU-tv6" kind="push" identifier="list" id="CnR-98-5R0"/>

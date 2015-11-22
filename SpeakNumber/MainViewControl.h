@@ -10,8 +10,9 @@
 #import <Common/PublicCommon.h>
 #import "DBmanger.h"
 #import "setting.h"
+#import "PlaySpeak.h"
 
-@interface MainViewControl : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MainViewControl : UIViewController<UITableViewDataSource,UITableViewDelegate,sounddelegate>
 {
     UIBarButtonItem *leftbtn;
     UIBarButtonItem *rightbtn;
@@ -19,8 +20,18 @@
     DBmanger *db;
     UIFont *font;
     CATextLayer *numberlayer;
+    CATextLayer *countslayer;
+    CATextLayer *groupslayer;
+    
     settingConfig *config_now;
-    UILabel *celllabel;
+    __block UILabel *celllabel;
+    PlaySpeak *playsound;
+    
+    CAShapeLayer *shapelayer;
+    float runfloat,stepfloat,stepfloatrest;
+    int _groups,_counts;
+    __block BOOL rest;
+    BOOL isnormal;
     
 }
 @property (weak, nonatomic) IBOutlet UINavigationItem *navtitle;
@@ -30,5 +41,15 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnstop;
+@property (weak, nonatomic) IBOutlet UIButton *btnplay;
+@property (weak, nonatomic) IBOutlet UIButton *btnpause;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *switchbar;
+
+
+
+-(IBAction)clickplay:(id)sender;
+-(IBAction)clickpause:(id)sender;
+-(IBAction)clickstop:(id)sender;
 
 @end

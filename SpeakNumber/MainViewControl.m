@@ -17,11 +17,15 @@
 @synthesize numberview;
 @synthesize tableview;
 @synthesize numberimg;
+@synthesize btnplay;
+@synthesize btnpause;
+@synthesize btnstop;
+@synthesize switchbar;
 - (void)viewDidLoad {
     [super viewDidLoad];
   
     db =[[DBmanger alloc] initDB];
-    configgroup = [db getConfigdataForALLGroup];
+    
     navtitle.title = @"报数";
  
     font = [UIFont fontWithName:@"Cansiparane" size:44];
@@ -34,19 +38,31 @@
 //    navtitle.rightBarButtonItem = rightbtn;
     // Do any additional setup after loading the view.
     
+    
+    btnplay.layer.cornerRadius = btnplay.frame.size.width /2;
+    btnplay.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+    btnplay.layer.borderWidth=1;
+    
+    btnplay.layer.masksToBounds=YES;
+    
+    
+    btnpause.layer.cornerRadius = btnpause.frame.size.width /2;
+    btnpause.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+    btnpause.layer.borderWidth=1;
+    
+    btnpause.layer.masksToBounds=YES;
+    
+    btnstop.layer.cornerRadius = btnpause.frame.size.width /2;
+    btnstop.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+    btnstop.layer.borderWidth=1;
+    
+    btnstop.layer.masksToBounds=YES;
+    
+    
     UIImageView *backview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back"]];
     backview.frame = self.view.frame;
     [self.view insertSubview:backview atIndex:0];
-    
-    numberlayer = [[CATextLayer  alloc] init];
-    numberlayer.font = (CFTypeRef)CFBridgingRetain(font);
-    numberlayer.fontSize = 90;
-    numberlayer.string = @"1";
-
-    numberlayer.foregroundColor = [[UIColor whiteColor] CGColor];
-    numberlayer.alignmentMode = kCAAlignmentCenter;//字体的对齐方式
-    numberlayer.frame = numberimg.frame;
-    [numberimg.layer  insertSublayer:numberlayer atIndex:1];
+   
     
     tableview.backgroundColor = [UIColor clearColor];
     tableview.delegate = self;
@@ -54,25 +70,232 @@
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 
-
-    
-    
+    isnormal = YES;
+    [switchbar addTarget:self action:@selector(switchchange) forControlEvents:UIControlEventValueChanged];
+    switchbar.hidden=YES;
     [self updateTableLayout];
     
     [self initnumberview];
     
-    [self displaytableinit];
+    
 }
 
+-(void)switchchange
+{
+    switch (switchbar.selectedSegmentIndex) {
+        case 0:
+            isnormal = YES;
+            break;
+        case 1:
+            isnormal = NO;
+            break;
+            
+     
+    }
+}
+
+-(void)completesound:(int *)playid soundid:(int *)soundid
+{
+    CABasicAnimation *pathAnimation;
+    CABasicAnimation *scaleAnimation;
+    CABasicAnimation *opacityAnimation;
+    CAAnimationGroup *animationgroup;
+    CATransition *animationtran;
+    dispatch_queue_t globalQ3;
+    switch (*playid) {
+        case 1:
+            [shapelayer removeAllAnimations];
+            scaleAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+            scaleAnimation.fromValue = [NSNumber numberWithFloat:1];
+            scaleAnimation.toValue = [NSNumber numberWithFloat:0];
+            scaleAnimation.duration=1;
+            opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];         scaleAnimation.fromValue = [NSNumber numberWithFloat:1];
+            opacityAnimation.toValue = [NSNumber numberWithFloat:0];
+            opacityAnimation.duration = 1;
+            
+            animationgroup = [[CAAnimationGroup alloc] init];
+            animationgroup.animations = @[scaleAnimation,opacityAnimation];
+            animationgroup.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            
+            animationgroup.duration=1;
+            animationgroup.removedOnCompletion = NO;
+            animationgroup.fillMode = kCAFillModeForwards;
+            [shapelayer addAnimation:animationgroup forKey:nil];
+            
+            
+            
+          
+            numberlayer.string = @"1";
+            countslayer.string = [NSString stringWithFormat:@"%d 个",_counts];
+            groupslayer.string = [NSString stringWithFormat:@"%D 组",_groups];
+            
+            
+            
+            
+            break;
+        case 2:
+            shapelayer.strokeColor = [[UIColor clearColor] CGColor];
+            animationtran = [CATransition animation];
+            animationtran.type = kCATransitionFade;
+            animationtran.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            animationtran.duration = 0.4;
+            [numberlayer addAnimation:animationtran forKey:nil];
+            numberlayer.string=@"3";
+            numberlayer.foregroundColor = [[UIColor whiteColor]CGColor];
+            countslayer.foregroundColor = [[UIColor whiteColor]CGColor];
+            groupslayer.foregroundColor= [[UIColor whiteColor]CGColor];
+        
+            shapelayer.opacity=1;
+            [shapelayer removeAllAnimations];
+            break;
+        case 3:
+            btnpause.enabled=YES;
+            runfloat=0;
+            shapelayer.strokeEnd=0;
+            [shapelayer removeAllAnimations];
+            animationtran = [CATransition animation];
+            animationtran.type = kCATransitionFade;
+            animationtran.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            animationtran.duration = 0.4;
+            [numberlayer addAnimation:animationtran forKey:nil];
+            if (*soundid == 0)
+                numberlayer.string=@"GO";
+            else
+                numberlayer.string=[NSString stringWithFormat:@"%d",*soundid];
+            
+            break;
+     
+        case 4://报数
+            
+            scaleAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+            scaleAnimation.fromValue = [NSNumber numberWithFloat:runfloat];
+            scaleAnimation.toValue = [NSNumber numberWithFloat:runfloat + stepfloat];
+            runfloat =runfloat + stepfloat;
+            shapelayer.strokeEnd =runfloat;
+            
+            scaleAnimation.duration=0.75;
+            shapelayer.strokeColor= [[UIColor whiteColor] CGColor];
+            scaleAnimation.removedOnCompletion=NO;
+            animationgroup.fillMode = kCAFillModeForwards;
+            [shapelayer addAnimation:scaleAnimation forKey:nil];
+            
+            animationtran = [CATransition animation];
+            animationtran.type = kCATransitionFade;
+            animationtran.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            animationtran.duration = 0.4;
+            [numberlayer addAnimation:animationtran forKey:nil];
+            numberlayer.string=[NSString stringWithFormat:@"%d",*soundid];
+            
+            _counts++;
+            countslayer.string = [NSString stringWithFormat:@"%d 个",_counts];
+            groupslayer.string = [NSString stringWithFormat:@"%D 组",_groups];
+            break;
+        case 10:
+            [self clickstop:nil];
+            break;
+        case 6://休息
+            runfloat=0;
+            _groups++;
+             [shapelayer removeAllAnimations];
+            shapelayer.strokeEnd=0;
+            btnpause.enabled=NO;
+            
+            globalQ3 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            
+            dispatch_async(globalQ3, ^{
+                int i = 30;
+              
+                while (rest) {
+                    
+                    if (i == 0)
+                        return ;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        numberlayer.string = [NSString stringWithFormat:@"%d",i];
+                       CABasicAnimation * scaleAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+                        scaleAnimation.fromValue = [NSNumber numberWithFloat:runfloat];
+                        scaleAnimation.toValue = [NSNumber numberWithFloat:runfloat + stepfloatrest];
+                        runfloat =runfloat + stepfloatrest;
+                        shapelayer.strokeEnd =runfloat;
+                        shapelayer.strokeColor = [[UIColor greenColor]CGColor];
+                        scaleAnimation.duration=0.99;
+                      
+                        scaleAnimation.removedOnCompletion=NO;
+                        animationgroup.fillMode = kCAFillModeForwards;
+                        [shapelayer addAnimation:scaleAnimation forKey:nil];
+                        
+                        
+                    });
+                    
+                    
+                    i--;
+                    sleep(1);
+                }
+            });
+            
+            
+            break;
+
+    }
+}
+
+-(void)clickpause:(id)sender
+{
+    [playsound Pause];
+    btnplay.enabled=YES;
+}
+
+-(void)clickplay:(id)sender
+{
+    tableview.userInteractionEnabled=NO;
+    
+    if (playsound.ISPlay)
+        [playsound Continue];
+    else{
+        rest = YES;
+        _groups=1;
+        _counts=0;
+        stepfloatrest =((float)1) / (float)config_now->grouprest;
+        groupslayer.string = [NSString stringWithFormat:@"%D 组",_groups];
+        stepfloat = ((float)1) / (float)config_now->groupincount;
+        runfloat = 0;
+      
+        [playsound StartThread];
+    }
+    btnplay.enabled=NO;
+}
+
+-(void)clickstop:(id)sender
+{
+    btnplay.enabled=YES;
+    rest = NO;
+    tableview.userInteractionEnabled=YES;
+    runfloat = 0;
+    shapelayer.strokeEnd=0;
+    [shapelayer removeAllAnimations];
+    [playsound StopThread];
+    numberlayer.foregroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
+    countslayer.foregroundColor=[[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
+    groupslayer.foregroundColor=[[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
+   
+    
+}
 -(void)viewDidAppear:(BOOL)animated
 {
+    configgroup = [db getConfigdataForALLGroup];
+    [tableview reloadData];
     if (config_now == NULL)
         config_now  = malloc(sizeof(settingConfig));
+    
+    [self displaytableinit];
+
+
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
     free(config_now);
     config_now=NULL;
+    [playsound StopThread];
+    playsound = nil;
 }
 
 -(void)displaytableinit
@@ -81,8 +304,13 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
     dispatch_after(popTime, mainQ, ^(void){
         [tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0 ] animated:YES scrollPosition:UITableViewScrollPositionTop];
-        
-        
+        UITableViewCell*cell = [tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        cell.textLabel.textColor =[UIColor yellowColor];
+        celllabel = cell.textLabel;
+        int _i=0;
+        [self setindexConfig:&_i];
+        tableview.userInteractionEnabled=YES;
+   
     });
 }
 
@@ -106,13 +334,15 @@
 
 }
 
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *d = [configgroup objectAtIndex:indexPath.row];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.textLabel.text =[d objectForKey:@"group"];
     cell.textLabel.textColor=[[UIColor grayColor] colorWithAlphaComponent:0.7];
-
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return  cell;
 }
 
@@ -134,9 +364,24 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.textLabel.textColor = [UIColor yellowColor];
     celllabel = cell.textLabel;
+    [self AnimationCell: cell.selectedBackgroundView.layer];
     [self setindexConfig:&index];    
 }
 
+
+-(void)AnimationCell:(CALayer *)layer
+{
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.fromValue = [NSNumber numberWithFloat:0.75];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:1.0];
+    scaleAnimation.duration = 0.3;
+    [layer addAnimation:scaleAnimation forKey:nil];
+    
+ 
+    
+    
+    
+}
 
 
 -(void)setindexConfig:(int *)index
@@ -160,7 +405,11 @@
             sc.resttype = (int)[db_c.value integerValue];
     }
     memcpy(config_now, &sc, sizeof(settingConfig));
-    
+    playsound=nil;
+    playsound = [[PlaySpeak alloc] init:&config_now->speakInterval];
+    playsound.sounddelegate =self;
+    btnplay.enabled=YES;
+    btnpause.enabled=YES;
 }
 
 -(void)updateTableLayout
@@ -197,7 +446,89 @@
 -(void)initnumberview
 {
     
+    numberlayer = [[CATextLayer  alloc] init];
+    numberlayer.font = (CFTypeRef)CFBridgingRetain(font);
+    numberlayer.fontSize = 100;
+    numberlayer.foregroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
+    numberlayer.string = @"1";
+    
+  
+    numberlayer.alignmentMode = kCAAlignmentCenter;//字体的对齐方式
+    numberlayer.frame = numberimg.frame;
+    
+    [numberimg.layer  insertSublayer:numberlayer atIndex:1];
+    
+    countslayer = [[CATextLayer  alloc] init];
+ 
+    countslayer.fontSize = 24;
+    countslayer.string = @"0 个";
+    countslayer.foregroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
+    
+  
+    countslayer.alignmentMode = kCAAlignmentCenter;//字体的对齐方式
+    countslayer.frame = CGRectMake(numberlayer.frame.origin.x, numberimg.frame.size.height /2 +10, numberlayer.frame.size.width, numberlayer.frame.size.height);
+    [numberimg.layer  insertSublayer:countslayer atIndex:1];
+    
+    groupslayer = [[CATextLayer  alloc] init];
+
+    groupslayer.fontSize = 24;
+    groupslayer.string = @"0 组";
+    groupslayer.foregroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
+    
+ 
+    groupslayer.alignmentMode = kCAAlignmentCenter;//字体的对齐方式
+    groupslayer.frame = CGRectMake(numberlayer.frame.origin.x, numberimg.frame.size.height /2 + 40 , numberlayer.frame.size.width, numberlayer.frame.size.height);
+    [numberimg.layer  insertSublayer:groupslayer atIndex:1];
+    
+    
+    numberimg.layer.borderWidth=1;
+    numberimg.layer.borderColor=[[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+    numberimg.image=nil;
+    numberimg.layer.cornerRadius = numberimg.frame.size.width /2;
+    numberimg.layer.masksToBounds = YES;
+    
+    shapelayer = [CAShapeLayer layer];
+
+    shapelayer.path = [self drawPathWithArcCenter];
+    shapelayer.fillColor = [UIColor clearColor].CGColor;
+
+    shapelayer.strokeColor =[[UIColor yellowColor] CGColor];
+
+    shapelayer.lineWidth = 3;
+    shapelayer.lineCap = kCALineCapRound;
+    shapelayer.strokeEnd=1;
+    
+    [numberimg.layer addSublayer:shapelayer];
+    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    pathAnimation.duration = 1;
+    pathAnimation.fromValue = @0;
+    pathAnimation.toValue = @1;
+    pathAnimation.removedOnCompletion = YES;
+    
+    [shapelayer addAnimation:pathAnimation forKey:nil];
+    
+    
 }
+
+
+- (CGPathRef)drawPathWithArcCenter {
+    
+    CGFloat position_y = (numberimg.frame.size.height)/2;
+    CGFloat position_x = (numberimg.frame.size.width)/2; // Assuming that width == height
+    //    return [UIBezierPath bezierPathWithArcCenter:CGPointMake(position_x, position_y)
+    //                                          radius:position_y
+    //                                      startAngle:(-M_PI/2)
+    //                                        endAngle:(3*M_PI/2)
+    //                                       clockwise:YES].CGPath;
+    
+    UIBezierPath * apath = [UIBezierPath bezierPath];
+    
+    [apath addArcWithCenter:CGPointMake(position_x,position_y) radius:(numberimg.frame.size.width)/2 -2  startAngle:-M_PI/2 endAngle:3*M_PI/2 clockwise:YES];
+    return [apath CGPath];
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

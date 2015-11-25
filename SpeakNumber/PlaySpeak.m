@@ -34,11 +34,31 @@ static int playid,soundid;
     audiourl = [[NSURL alloc] initFileURLWithPath:audiopath];
 
     ISPlay=NO;
+    
+    
     return self;
 }
 
-
-
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    if (condtionplay){
+        [condtionplay lock];
+        [condtionplay signal];
+        [condtionplay unlock];
+    }
+    player.delegate=nil;
+    player=nil;
+}
+-(void)playsound:(NSString *)wavfile
+{
+    NSString *Path=[[NSBundle mainBundle] pathForResource:wavfile ofType:@"wav"];
+    NSURL *soundfileURL=[NSURL fileURLWithPath:Path];
+    audioplayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:soundfileURL  error:nil];
+    audioplayer2.delegate =self;
+    [audioplayer2 prepareToPlay];
+    audioplayer2.volume=1;
+    [audioplayer2 play];
+}
 
 
 -(void)StartThread
@@ -56,7 +76,7 @@ static int playid,soundid;
         
         audioplayer.numberOfLoops=INT8_MAX;
         [audioplayer play];
-        audioplayer.volume = 0.3;
+        audioplayer.volume = 0.15;
         
 
         
@@ -82,7 +102,7 @@ static int playid,soundid;
                     return ;
                 }
                 playid = 6;
-                [self GetPlaysound:@"rest"];
+                [self playsound:@"rest"];
                 dispatch_async(mainQ, ^{
                     [self.sounddelegate completesound:&playid soundid:&i];
                 });
@@ -93,7 +113,7 @@ static int playid,soundid;
                 g++;
             }
             playid = 4;
-            [self GetPlaysound:[NSString stringWithFormat:@"%d",i]];
+            [self playsound:[NSString stringWithFormat:@"%d",i]];
             dispatch_async(mainQ, ^{
                 [self.sounddelegate completesound:&playid soundid:&i];
             });
@@ -121,11 +141,11 @@ static int playid,soundid;
     dispatch_async(mainQ, ^{   [self.sounddelegate completesound:&playid soundid:&soundid];});
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
-    [self GetPlaysound:@"meizu"];
+    [self playsound:@"meizu"];
     [condtionplay wait];
-    [self GetPlaysound:[NSString stringWithFormat:@"%d",*counts]];
+    [self playsound:[NSString stringWithFormat:@"%d",*counts]];
     [condtionplay wait];
-    [self GetPlaysound:@"ci"];
+    [self playsound:@"ci"];
     [condtionplay wait];
     [condtionplay unlock];
     playid =2;
@@ -140,25 +160,25 @@ static int playid,soundid;
     playid=3;
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
-    [self GetPlaysound:@"3"];
+    [self playsound:@"3"];
     soundid=3;
     dispatch_async(mainQ, ^{
         [self.sounddelegate completesound:&playid soundid:&soundid];});
     [condtionplay wait];
     sleep(1);
-    [self GetPlaysound:@"2"];
+    [self playsound:@"2"];
     soundid=2;
     dispatch_async(mainQ, ^{
         [self.sounddelegate completesound:&playid soundid:&soundid];});
     [condtionplay wait];
     sleep(1);
-    [self GetPlaysound:@"1"];
+    [self playsound:@"1"];
     soundid=1;
     dispatch_async(mainQ, ^{
         [self.sounddelegate completesound:&playid soundid:&soundid];});
     [condtionplay wait];
     sleep(1);
-    [self GetPlaysound:@"go"];
+    [self playsound:@"go"];
     
     soundid=0;
     dispatch_async(mainQ, ^{
@@ -172,7 +192,7 @@ static int playid,soundid;
     playid=9;
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
-    [self GetPlaysound:@"rest"];
+    [self playsound:@"rest"];
     [condtionplay wait];
     [condtionplay unlock];
     condtionplay = nil;
@@ -182,7 +202,7 @@ static int playid,soundid;
 
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
-    [self GetPlaysound:@"finish"];
+    [self playsound:@"finish"];
     [condtionplay wait];
     [condtionplay unlock];
     condtionplay = nil;

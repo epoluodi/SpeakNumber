@@ -18,7 +18,7 @@
 
 @end
 
-@interface PlaySpeak : NSObject
+@interface PlaySpeak : NSObject<AVAudioPlayerDelegate>
 {
     BOOL ISRUN;
     BOOL ISPause;
@@ -33,6 +33,7 @@
     int *resttime;
     NSURL *audiourl;
     AVAudioPlayer *audioplayer;
+    AVAudioPlayer *audioplayer2;
     SystemSoundID  soundFileObject;
     
     

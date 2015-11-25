@@ -29,8 +29,10 @@
     navtitle.title = @"报数";
  
     font = [UIFont fontWithName:@"Cansiparane" size:44];
-    leftbtn = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
-    navtitle.leftBarButtonItem = leftbtn;
+    rightbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
+    navtitle.rightBarButtonItem = rightbtn;
+//    leftbtn = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
+//    navtitle.leftBarButtonItem = leftbtn;
     
     self.navigationController.navigationBar.translucent =YES;
     self.navigationController.navigationBar.barStyle =UIBarStyleBlackTranslucent;

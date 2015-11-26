@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B7378EA1C07627200174028 /* appico.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7378E91C07627200174028 /* appico.png */; };
 		7B8365D91BF042AA0034728E /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8365D81BF042AA0034728E /* Config.m */; };
 		7B84BE571BEA5D270091FC7D /* PreSvaeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B84BE561BEA5D270091FC7D /* PreSvaeView.m */; };
 		7B8FA0A01BF8B2D500F72934 /* numberfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8FA09F1BF8ACB400F72934 /* numberfont.ttf */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		7B0BC8F91BFB8D01001276D9 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		7B7378E91C07627200174028 /* appico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appico.png; sourceTree = "<group>"; };
 		7B8365D71BF042AA0034728E /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		7B8365D81BF042AA0034728E /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		7B84BE551BEA5D270091FC7D /* PreSvaeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreSvaeView.h; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 		7BBBFC801BE3428D00EF539B /* SpeakNumber */ = {
 			isa = PBXGroup;
 			children = (
+				7B7378E91C07627200174028 /* appico.png */,
 				7BD7631A1C01A8D400429AA6 /* audio */,
 				7B8FA09F1BF8ACB400F72934 /* numberfont.ttf */,
 				7BBA931A1BE65470001F8F31 /* ASValuePopUpView.h */,
@@ -297,6 +300,7 @@
 				7BD763181C00C8C500429AA6 /* backaudio.m4a in Resources */,
 				7BD763361C01AD0C00429AA6 /* 1.wav in Resources */,
 				7BD7633B1C01AD0C00429AA6 /* 6.wav in Resources */,
+				7B7378EA1C07627200174028 /* appico.png in Resources */,
 				7B8FA0A01BF8B2D500F72934 /* numberfont.ttf in Resources */,
 				7BD763371C01AD0C00429AA6 /* 2.wav in Resources */,
 				7BD763431C01AD0C00429AA6 /* rest.wav in Resources */,

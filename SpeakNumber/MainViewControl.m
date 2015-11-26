@@ -31,6 +31,7 @@
     font = [UIFont fontWithName:@"Cansiparane" size:44];
     rightbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
     navtitle.rightBarButtonItem = rightbtn;
+    rightbtn.tintColor =[UIColor whiteColor];
 //    leftbtn = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
 //    navtitle.leftBarButtonItem = leftbtn;
     
@@ -41,33 +42,38 @@
     // Do any additional setup after loading the view.
     
     
+//    
+    [btnplay setBackgroundImage:[UIImage imageNamed:@"start1"] forState:UIControlStateNormal];
+        [btnplay setBackgroundImage:[UIImage imageNamed:@"start"] forState:UIControlStateHighlighted];
+//    btnplay.layer.cornerRadius = btnplay.frame.size.width /2;
+//    btnplay.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+//    btnplay.layer.borderWidth=1;
+//    
+//    btnplay.layer.masksToBounds=YES;
     
-    [btnplay setBackgroundImage:@"start" forState:UIControlStateNormal];
-    btnplay.layer.cornerRadius = btnplay.frame.size.width /2;
-    btnplay.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
-    btnplay.layer.borderWidth=1;
+    [btnpause setBackgroundImage:[UIImage imageNamed:@"pause1"] forState:UIControlStateNormal];
+    [btnpause setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateHighlighted];
+//    btnpause.layer.cornerRadius = btnpause.frame.size.width /2;
+//    btnpause.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+//    btnpause.layer.borderWidth=1;
+//    
+//    btnpause.layer.masksToBounds=YES;
     
-    btnplay.layer.masksToBounds=YES;
-    
-    [btnpause setBackgroundImage:@"pause" forState:UIControlStateNormal];
-    btnpause.layer.cornerRadius = btnpause.frame.size.width /2;
-    btnpause.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
-    btnpause.layer.borderWidth=1;
-    
-    btnpause.layer.masksToBounds=YES;
-    
-    
-    [btnstop setBackgroundImage:@"stop" forState:UIControlStateNormal];
-    btnstop.layer.cornerRadius = btnpause.frame.size.width /2;
-    btnstop.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
-    btnstop.layer.borderWidth=1;
-    
-    btnstop.layer.masksToBounds=YES;
+//    
+    [btnstop setBackgroundImage:[UIImage imageNamed:@"stop1"] forState:UIControlStateNormal];
+       [btnstop setBackgroundImage:[UIImage imageNamed:@"stop"] forState:UIControlStateHighlighted];
+//    btnstop.layer.cornerRadius = btnpause.frame.size.width /2;
+//    btnstop.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
+//    btnstop.layer.borderWidth=1;
+//    
+//    btnstop.layer.masksToBounds=YES;
     
     
     UIImageView *backview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back"]];
+    
     backview.frame = self.view.frame;
-    [self.view insertSubview:backview atIndex:0];
+//    [self.view insertSubview:backview atIndex:0];
+    [self.view setBackgroundColor:[UIColor blackColor]];
    
     
     tableview.backgroundColor = [UIColor clearColor];

@@ -106,7 +106,7 @@ static int playid,soundid;
                 dispatch_async(mainQ, ^{
                     [self.sounddelegate completesound:&playid soundid:&i];
                 });
-                sleep(*resttime);
+                sleep(*resttime -3);//最后3秒开始倒数
                 [self playsound321go];
                 //休息
                 i=1;

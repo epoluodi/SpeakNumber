@@ -41,19 +41,23 @@
     // Do any additional setup after loading the view.
     
     
+    
+    [btnplay setBackgroundImage:@"start" forState:UIControlStateNormal];
     btnplay.layer.cornerRadius = btnplay.frame.size.width /2;
     btnplay.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
     btnplay.layer.borderWidth=1;
     
     btnplay.layer.masksToBounds=YES;
     
-    
+    [btnpause setBackgroundImage:@"pause" forState:UIControlStateNormal];
     btnpause.layer.cornerRadius = btnpause.frame.size.width /2;
     btnpause.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
     btnpause.layer.borderWidth=1;
     
     btnpause.layer.masksToBounds=YES;
     
+    
+    [btnstop setBackgroundImage:@"stop" forState:UIControlStateNormal];
     btnstop.layer.cornerRadius = btnpause.frame.size.width /2;
     btnstop.layer.borderColor = [[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f] CGColor];
     btnstop.layer.borderWidth=1;

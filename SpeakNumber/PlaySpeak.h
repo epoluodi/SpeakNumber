@@ -20,7 +20,7 @@
 
 @interface PlaySpeak : NSObject<AVAudioPlayerDelegate>
 {
-    BOOL ISRUN;
+    __block BOOL ISRUN;
     BOOL ISPause;
     NSLock *lock;
     NSCondition *condtion;
@@ -35,7 +35,7 @@
     AVAudioPlayer *audioplayer;
     AVAudioPlayer *audioplayer2;
     SystemSoundID  soundFileObject;
-    
+    AVAudioSession *session;
     
 }
 @property (weak,nonatomic)NSObject<sounddelegate> *sounddelegate;

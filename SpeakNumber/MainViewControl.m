@@ -28,11 +28,12 @@
     
     navtitle.title = @"报数";
  
-    font = [UIFont fontWithName:@"Cansiparane" size:44];
-    rightbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
+    font = [UIFont fontWithName:@"Digital-7" size:54];
+    rightbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(rightclick)];
     navtitle.rightBarButtonItem = rightbtn;
     rightbtn.tintColor =[UIColor whiteColor];
-//    leftbtn = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
+//    leftbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
+//    leftbtn.tintColor =[UIColor whiteColor];
 //    navtitle.leftBarButtonItem = leftbtn;
     
     self.navigationController.navigationBar.translucent =YES;
@@ -203,6 +204,7 @@
             groupslayer.string = [NSString stringWithFormat:@"%D 组",_groups];
             break;
         case 10:
+            
             [self clickstop:nil];
             break;
         case 6://休息
@@ -215,11 +217,11 @@
             globalQ3 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
             
             dispatch_async(globalQ3, ^{
-                int i = 30;
+                int i = config_now->grouprest ;
               
                 while (rest) {
                     
-                    if (i == 0)
+                    if ((i-3) == 0)
                         return ;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         numberlayer.string = [NSString stringWithFormat:@"%d",i];
@@ -246,12 +248,14 @@
             
             
             break;
+        
 
     }
 }
 
 -(void)clickpause:(id)sender
 {
+    
     [playsound Pause];
     btnplay.enabled=YES;
 }
@@ -266,7 +270,7 @@
         rest = YES;
         _groups=1;
         _counts=0;
-        stepfloatrest =((float)1) / (float)config_now->grouprest;
+        stepfloatrest =((float)1) / (float)(config_now->grouprest-3);
         groupslayer.string = [NSString stringWithFormat:@"%D 组",_groups];
         stepfloat = ((float)1) / (float)config_now->groupincount;
         runfloat = 0;
@@ -278,17 +282,26 @@
 
 -(void)clickstop:(id)sender
 {
-    btnplay.enabled=YES;
+    
     rest = NO;
     tableview.userInteractionEnabled=YES;
     runfloat = 0;
+    btnplay.enabled=NO;
     shapelayer.strokeEnd=0;
     [shapelayer removeAllAnimations];
     [playsound StopThread];
     numberlayer.foregroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
     countslayer.foregroundColor=[[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
     groupslayer.foregroundColor=[[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        sleep(1);
+        dispatch_async(dispatch_get_main_queue(), ^{
    
+            
+            btnplay.enabled=YES;
+        });
+
+    });
     
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -306,7 +319,8 @@
 {
     free(config_now);
     config_now=NULL;
-    [playsound StopThread];
+    [self clickstop:nil];
+ 
     playsound = nil;
 }
 
@@ -445,12 +459,13 @@
 
 -(void)leftclick
 {
-    [self performSegueWithIdentifier:@"setting" sender:self];
+    
+    [self performSegueWithIdentifier:@"preview" sender:self];
 }
 
 -(void)rightclick
 {
-    [self performSegueWithIdentifier:@"list" sender:self];
+    [self performSegueWithIdentifier:@"settingview" sender:self];
 }
 
 
@@ -460,13 +475,13 @@
     
     numberlayer = [[CATextLayer  alloc] init];
     numberlayer.font = (CFTypeRef)CFBridgingRetain(font);
-    numberlayer.fontSize = 100;
+    numberlayer.fontSize = 120;
     numberlayer.foregroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.45] CGColor];
     numberlayer.string = @"1";
     
   
     numberlayer.alignmentMode = kCAAlignmentCenter;//字体的对齐方式
-    numberlayer.frame = numberimg.frame;
+    numberlayer.frame = CGRectMake(numberimg.frame.origin.x, numberimg.frame.origin.y+5, numberimg.frame.size.width, numberimg.frame.size.height-5);
     
     [numberimg.layer  insertSublayer:numberlayer atIndex:1];
     

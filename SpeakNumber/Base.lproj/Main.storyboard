@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jfc-cq-npb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jfc-cq-npb">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,12 +37,12 @@
                     <connections>
                         <outlet property="navtitle" destination="TLT-1b-pKf" id="k6v-pf-ece"/>
                         <outlet property="table" destination="Jfc-cq-npb" id="bco-PF-TaW"/>
-                        <segue destination="50U-vh-tX9" kind="push" identifier="settingmanger" id="Kg1-71-kKE"/>
+                        <segue destination="50U-vh-tX9" kind="push" identifier="preview" id="buj-At-fCN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pTM-16-Ao4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1197" y="118"/>
+            <point key="canvasLocation" x="1011" y="926"/>
         </scene>
         <!--Title-->
         <scene sceneID="UxG-dQ-YFW">
@@ -56,7 +56,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h6N-4P-GwK">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h6N-4P-GwK">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,11 +75,12 @@
                     <connections>
                         <outlet property="navtitle" destination="gN7-VI-gf2" id="Zac-qb-wyG"/>
                         <outlet property="tableview" destination="h6N-4P-GwK" id="oTR-jR-hqn"/>
+                        <segue destination="OVa-9m-Obi" kind="push" identifier="settingview" id="RMW-SR-PgA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcj-Ik-gUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1628" y="118"/>
+            <point key="canvasLocation" x="1169" y="118"/>
         </scene>
         <!--Title-->
         <scene sceneID="tne-QT-ifu">
@@ -202,13 +203,14 @@
                         <outlet property="numberview" destination="7cQ-5I-TCH" id="AGQ-q7-t2Q"/>
                         <outlet property="switchbar" destination="PU1-5Y-Xfy" id="3v6-mY-tcd"/>
                         <outlet property="tableview" destination="UfV-ev-ENI" id="2pl-VT-8ld"/>
-                        <segue destination="OVa-9m-Obi" kind="push" identifier="setting" id="nGN-yC-ZX0"/>
                         <segue destination="nVQ-mU-tv6" kind="push" identifier="list" id="CnR-98-5R0"/>
+                        <segue destination="50U-vh-tX9" kind="push" identifier="preview" id="JQw-cR-6Sl"/>
+                        <segue destination="OVa-9m-Obi" kind="push" identifier="settingview" id="KhW-d3-YDv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="779" y="117"/>
+            <point key="canvasLocation" x="744" y="118"/>
         </scene>
         <!--Main Navigation-->
         <scene sceneID="w00-0E-6Pi">
@@ -253,10 +255,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DE5-MH-olu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="840"/>
+            <point key="canvasLocation" x="528" y="998"/>
         </scene>
     </scenes>
     <resources>
         <image name="cicle" width="208" height="208"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="RMW-SR-PgA"/>
+        <segue reference="buj-At-fCN"/>
+    </inferredMetricsTieBreakers>
 </document>

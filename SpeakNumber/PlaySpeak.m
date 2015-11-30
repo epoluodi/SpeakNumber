@@ -35,7 +35,9 @@ static int playid,soundid;
 
     ISPlay=NO;
     
-    
+    session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     return self;
 }
 
@@ -49,8 +51,21 @@ static int playid,soundid;
     player.delegate=nil;
     player=nil;
 }
--(void)playsound:(NSString *)wavfile
+-(BOOL)playsound:(NSString *)wavfile
 {
+    BOOL r = NO;
+    if (!ISRUN)
+        return YES;
+    if (ISPause)
+    {
+        NSLog(@"准备等待");
+        [condtion lock];
+        [condtion wait];
+        [condtion unlock];
+        r=YES;
+    }
+    
+    
     NSString *Path=[[NSBundle mainBundle] pathForResource:wavfile ofType:@"wav"];
     NSURL *soundfileURL=[NSURL fileURLWithPath:Path];
     audioplayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:soundfileURL  error:nil];
@@ -58,6 +73,7 @@ static int playid,soundid;
     [audioplayer2 prepareToPlay];
     audioplayer2.volume=1;
     [audioplayer2 play];
+    return r;
 }
 
 
@@ -121,6 +137,8 @@ static int playid,soundid;
             NSLog(@"进入1秒等待");
         
             i++;
+            if (!ISRUN)
+                return;
             sleep(*sleeptime);
             if (ISPause)
             {
@@ -137,16 +155,35 @@ static int playid,soundid;
 
 -(void)playsoundhead
 {
+    BOOL r;
     playid =1;
     dispatch_async(mainQ, ^{   [self.sounddelegate completesound:&playid soundid:&soundid];});
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
-    [self playsound:@"meizu"];
-    [condtionplay wait];
-    [self playsound:[NSString stringWithFormat:@"%d",*counts]];
-    [condtionplay wait];
-    [self playsound:@"ci"];
-    [condtionplay wait];
+    r =[self playsound:@"meizu"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
+    if (!r)
+        [condtionplay wait];
+    r=[self playsound:[NSString stringWithFormat:@"%d",*counts]];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
+    if (!r)
+        [condtionplay wait];
+    r =[self playsound:@"ci"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
+    if (!r)
+        [condtionplay wait];
     [condtionplay unlock];
     playid =2;
     dispatch_async(mainQ, ^{   [self.sounddelegate completesound:&playid soundid:&soundid];});
@@ -157,33 +194,66 @@ static int playid,soundid;
 
 -(void)playsound321go
 {
+    BOOL r;
     playid=3;
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
-    [self playsound:@"3"];
+
+    r =[self playsound:@"3"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
     soundid=3;
     dispatch_async(mainQ, ^{
         [self.sounddelegate completesound:&playid soundid:&soundid];});
-    [condtionplay wait];
-    sleep(1);
-    [self playsound:@"2"];
+    if (!r)
+        [condtionplay wait];
+    [NSThread sleepForTimeInterval:1];
+
+    r=[self playsound:@"2"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
     soundid=2;
     dispatch_async(mainQ, ^{
         [self.sounddelegate completesound:&playid soundid:&soundid];});
-    [condtionplay wait];
-    sleep(1);
-    [self playsound:@"1"];
+    if (!r)
+        [condtionplay wait];
+    [NSThread sleepForTimeInterval:1];
+    
+    r=[self playsound:@"1"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
     soundid=1;
     dispatch_async(mainQ, ^{
         [self.sounddelegate completesound:&playid soundid:&soundid];});
-    [condtionplay wait];
-    sleep(1);
-    [self playsound:@"go"];
+    if (!r)
+        [condtionplay wait];
     
+
+    [NSThread sleepForTimeInterval:1];
+    
+    
+    r=[self playsound:@"go"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
     soundid=0;
     dispatch_async(mainQ, ^{
         [self.sounddelegate completesound:&playid soundid:&soundid];});
-    [condtionplay wait];
+    if (!r)
+        [condtionplay wait];
+    
+    
     [condtionplay unlock];
     condtionplay = nil;
 }
@@ -193,6 +263,11 @@ static int playid,soundid;
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
     [self playsound:@"rest"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
     [condtionplay wait];
     [condtionplay unlock];
     condtionplay = nil;
@@ -203,6 +278,11 @@ static int playid,soundid;
     condtionplay = [[NSCondition alloc] init];
     [condtionplay lock];
     [self playsound:@"finish"];
+    if (!ISRUN){
+        [condtionplay unlock];
+        condtionplay = nil;
+        return;
+    }
     [condtionplay wait];
     [condtionplay unlock];
     condtionplay = nil;
@@ -219,22 +299,40 @@ static int playid,soundid;
     NSLog(@"继续");
     ISPlay=YES;
     [audioplayer play];
+    [audioplayer2 play];
 }
 -(void)StopThread
 {
+    [audioplayer stop];
+    [audioplayer2 stop];
     ISRUN=false;
     ISPause=NO;
     ISPlay=NO;
-    [audioplayer stop];
+    if (condtion){
+        [condtion lock];
+        [condtion signal];
+        [condtion unlock];
+    }
+    if (condtionplay){
+        [condtionplay lock];
+        [condtionplay signal];
+        [condtionplay unlock];
+    }
     audioplayer=nil;
+    audioplayer2=nil;
+   [session setActive:NO error:nil];
     
 }
 
 -(void)Pause
 {
+    if (!ISRUN)
+        return;
     ISPause = YES;
     NSLog(@"暂停");
     [audioplayer pause];
+    [audioplayer2 pause];
+
     
 }
 

@@ -81,7 +81,7 @@
 }
 -(void)rightclick
 {
-    [self performSegueWithIdentifier:@"settingmanger" sender:self];
+    [self performSegueWithIdentifier:@"preview" sender:self];
 }
 
 
@@ -202,7 +202,7 @@
             slider4.popUpViewColor = [UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             [cell.contentView addSubview:slider4];
             txttitle4 = [[UILabel alloc] init];
-            txttitle4.text=[NSString stringWithFormat:@"休息时间: 30 秒"];
+            txttitle4.text=[NSString stringWithFormat:@"每组间隔休息时间: 30 秒"];
             txttitle4.textColor =[UIColor colorWithRed:0.102f green:0.694f blue:0.992f alpha:1.00f];
             txttitle4.frame = CGRectMake(20  , slider4.frame.origin.y + 30+10, [PublicCommon GetALLScreen].size.width -40, 50);
             txttitle4.textAlignment = NSTextAlignmentCenter;
@@ -246,7 +246,7 @@
             
             break;
         case 4:
-            txttitle4.text=[NSString stringWithFormat:@"中间休息时间: %@ 秒",n];
+            txttitle4.text=[NSString stringWithFormat:@"每组间隔休息时间: %@ 秒",n];
           
             
             nowsettingconfig->grouprest = [n intValue];

@@ -11,8 +11,12 @@
 #import "DBmanger.h"
 #import "setting.h"
 #import "PlaySpeak.h"
+#import "LineProgressView.h"
+#import "ASValueTrackingSlider.h"
 
-@interface MainViewControl : UIViewController<UITableViewDataSource,UITableViewDelegate,sounddelegate>
+
+
+@interface MainViewControl : UIViewController<UITableViewDataSource,UITableViewDelegate,sounddelegate,ASValueTrackingSliderDataSource>
 {
     UIBarButtonItem *leftbtn;
     UIBarButtonItem *rightbtn;
@@ -32,7 +36,9 @@
     int _groups,_counts;
     __block BOOL rest;
     BOOL isnormal;
-    
+    LineProgressView *lineprogressview;
+    ASValueTrackingSlider *slider1;
+    UILabel *txttitle1;
 }
 @property (weak, nonatomic) IBOutlet UINavigationItem *navtitle;
 @property (weak, nonatomic) IBOutlet UIView *numberview;

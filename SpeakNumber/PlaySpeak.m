@@ -11,6 +11,7 @@
 @implementation PlaySpeak
 @synthesize ISPlay;
 @synthesize sounddelegate;
+@synthesize isnormal;
 static NSCondition *condtionplay;
 static int playid,soundid;
 
@@ -36,6 +37,7 @@ static int playid,soundid;
     ISPlay=NO;
     
     session = [AVAudioSession sharedInstance];
+    
     [session setActive:YES error:nil];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     return self;
@@ -51,6 +53,14 @@ static int playid,soundid;
     player.delegate=nil;
     player=nil;
 }
+//-(void)audioPlayerBeginInterruption:(AVAudioPlayer *)player
+//{
+//    [sounddelegate CalledWithStopPlay];
+//    
+//}
+
+
+
 -(BOOL)playsound:(NSString *)wavfile
 {
     BOOL r = NO;
@@ -77,6 +87,78 @@ static int playid,soundid;
 }
 
 
+-(void)StartThreadForTime:(int)timer_counts
+{
+    
+    if (ISRUN)
+        return;
+    
+    ISRUN = true;
+    ISPlay =YES;
+    
+    dispatch_async(globalQ, ^{
+        audioplayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audiourl  error:nil];
+        [audioplayer prepareToPlay];
+        
+        audioplayer.numberOfLoops=INT8_MAX;
+        [audioplayer play];
+        audioplayer.volume = 0.5;
+        
+        
+        
+  
+        playid = 11;
+        
+        
+        
+        dispatch_async(mainQ, ^{
+            [self.sounddelegate completesound:&playid soundid:0];
+        });
+        
+        [self playsound321go];
+        __block int i = 1;
+       
+        
+        while (ISRUN) {
+            if (i > timer_counts)
+            {
+                    [self playsoundfinish];
+                    playid = 10;
+                    dispatch_async(mainQ, ^{
+                        [self.sounddelegate completesound:&playid soundid:&i];
+                    });
+                    return ;
+                
+            }
+            playid = 12;
+            
+            [self playsound:@"ding"];
+            
+            dispatch_async(mainQ, ^{
+                [self.sounddelegate completesound:&playid soundid:&i];
+            });
+            
+            NSLog(@"进入1秒等待");
+            
+            i++;
+            if (!ISRUN)
+                return;
+            sleep(1);
+            if (ISPause)
+            {
+                NSLog(@"准备等待");
+                [condtion lock];
+                [condtion wait];
+                [condtion unlock];
+            }
+        }
+        
+    });
+    
+}
+
+
+
 -(void)StartThread
 {
 
@@ -92,12 +174,13 @@ static int playid,soundid;
         
         audioplayer.numberOfLoops=INT8_MAX;
         [audioplayer play];
-        audioplayer.volume = 0.15;
+        audioplayer.volume = 0.5;
         
 
         
         [self playsoundhead];
         sleep(1);
+        
         [self playsound321go];
         
          __block int i = 1;
@@ -118,18 +201,24 @@ static int playid,soundid;
                     return ;
                 }
                 playid = 6;
+                
                 [self playsound:@"rest"];
+               
                 dispatch_async(mainQ, ^{
                     [self.sounddelegate completesound:&playid soundid:&i];
                 });
+                
                 sleep(*resttime -3);//最后3秒开始倒数
+                
                 [self playsound321go];
                 //休息
                 i=1;
                 g++;
             }
             playid = 4;
+         
             [self playsound:[NSString stringWithFormat:@"%d",i]];
+       
             dispatch_async(mainQ, ^{
                 [self.sounddelegate completesound:&playid soundid:&i];
             });

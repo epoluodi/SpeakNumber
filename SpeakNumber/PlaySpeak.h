@@ -15,7 +15,7 @@
 @protocol sounddelegate
 
 -(void)completesound:(int *)playid soundid:(int *)soundid;
-
+-(void)CalledWithStopPlay;
 @end
 
 @interface PlaySpeak : NSObject<AVAudioPlayerDelegate>
@@ -40,6 +40,7 @@
 }
 @property (weak,nonatomic)NSObject<sounddelegate> *sounddelegate;
 @property (assign)BOOL ISPlay;
+@property (assign)BOOL isnormal;
 static void completionCallback (SystemSoundID  mySSID, void* myself) ;
 -(instancetype)init:(settingConfig *)settingconfig;
 -(void)StopThread;
@@ -47,4 +48,5 @@ static void completionCallback (SystemSoundID  mySSID, void* myself) ;
 -(void)Pause;
 -(void)Continue;
 -(void)GetPlaysound:(NSString *)wavfile;
+-(void)StartThreadForTime:(int)timer_counts;
 @end

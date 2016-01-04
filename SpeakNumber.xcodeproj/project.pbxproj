@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B1BB3031C25B878005028CE /* LineProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BB3001C25B878005028CE /* LineProgressLayer.m */; };
+		7B1BB3041C25B878005028CE /* LineProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BB3021C25B878005028CE /* LineProgressView.m */; };
 		7B7378EA1C07627200174028 /* appico.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7378E91C07627200174028 /* appico.png */; };
 		7B7379401C0ABEEC00174028 /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B7379081C08C09600174028 /* digital-7.ttf */; };
 		7B7379421C0AC4D100174028 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7B7379411C0AC4D100174028 /* ding.wav */; };
@@ -97,6 +99,10 @@
 
 /* Begin PBXFileReference section */
 		7B0BC8F91BFB8D01001276D9 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		7B1BB2FF1C25B878005028CE /* LineProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineProgressLayer.h; sourceTree = "<group>"; };
+		7B1BB3001C25B878005028CE /* LineProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineProgressLayer.m; sourceTree = "<group>"; };
+		7B1BB3011C25B878005028CE /* LineProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineProgressView.h; sourceTree = "<group>"; };
+		7B1BB3021C25B878005028CE /* LineProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineProgressView.m; sourceTree = "<group>"; };
 		7B7378E91C07627200174028 /* appico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appico.png; sourceTree = "<group>"; };
 		7B7379081C08C09600174028 /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
 		7B7379411C0AC4D100174028 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
@@ -199,6 +205,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B1BB2FE1C25B864005028CE /* lineprocess */ = {
+			isa = PBXGroup;
+			children = (
+				7B1BB2FF1C25B878005028CE /* LineProgressLayer.h */,
+				7B1BB3001C25B878005028CE /* LineProgressLayer.m */,
+				7B1BB3011C25B878005028CE /* LineProgressView.h */,
+				7B1BB3021C25B878005028CE /* LineProgressView.m */,
+			);
+			name = lineprocess;
+			sourceTree = "<group>";
+		};
 		7BBA93051BE511C3001F8F31 /* db */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +247,7 @@
 		7BBBFC801BE3428D00EF539B /* SpeakNumber */ = {
 			isa = PBXGroup;
 			children = (
+				7B1BB2FE1C25B864005028CE /* lineprocess */,
 				7B0BC8F91BFB8D01001276D9 /* libstdc++.tbd */,
 				7BD763131C00BD1400429AA6 /* AVFoundation.framework */,
 				7B7379081C08C09600174028 /* digital-7.ttf */,
@@ -458,10 +476,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B1BB3031C25B878005028CE /* LineProgressLayer.m in Sources */,
 				7BBBFCA01BE34C1800EF539B /* SettingViewControl.m in Sources */,
 				7B8365D91BF042AA0034728E /* Config.m in Sources */,
 				7BBBFC9A1BE34BD100EF539B /* MainNavigation.m in Sources */,
 				7BBBFCA31BE34C3D00EF539B /* ListViewControl.m in Sources */,
+				7B1BB3041C25B878005028CE /* LineProgressView.m in Sources */,
 				7BD763121BFCCE6B00429AA6 /* PlaySpeak.m in Sources */,
 				7BBBFC9D1BE34BF900EF539B /* MainViewControl.m in Sources */,
 				7B84BE571BEA5D270091FC7D /* PreSvaeView.m in Sources */,

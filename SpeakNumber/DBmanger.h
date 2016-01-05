@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "Config.h"
+#import "Groupinfo.h"
 
 
 
@@ -32,4 +33,9 @@
 -(NSArray *)getConfigdataForGroup;
 -(void)delconfig:(NSString *)group;
 -(NSArray *)getConfigdataForALLGroup;
+
+-(void)CHeckGroupNameInInfotable:(NSString *)group;
+-(void)updateGroupinfo:(NSString *)group value1:(NSNumber *)value1 value2:(NSNumber *)value2;
+
+-(NSArray *)getGroupinfo;
 @end

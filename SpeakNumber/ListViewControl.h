@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBmanger.h"
+#import "groupcell.h"
 
-@interface ListViewControl : UIViewController
+
+
+@interface ListViewControl : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UINavigationItem *navtitle;
+
+@property (weak, nonatomic) IBOutlet UITableView *table;
 
 @end

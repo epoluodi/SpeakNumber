@@ -47,7 +47,7 @@
     
     UIAlertAction *actionsave  = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
+
         if ([db checkConfigData:textname.text])
         {
             
@@ -176,6 +176,10 @@
     [db addData:@"grouprest" value:[NSString stringWithFormat:@"%D",app.defaultsettingfoncig.grouprest]  group:textname.text];
     //每组休息类型
     [db addData:@"resttype" value:[NSString stringWithFormat:@"%D",app.defaultsettingfoncig.resttype]  group:textname.text];
+    
+    [textname resignFirstResponder];
+    textname = nil;
+    
 }
 
 

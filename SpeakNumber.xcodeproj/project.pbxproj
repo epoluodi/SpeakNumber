@@ -82,6 +82,9 @@
 		7BD763431C01AD0C00429AA6 /* rest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7BD763351C01AD0C00429AA6 /* rest.wav */; };
 		7BD763451C01BD1000429AA6 /* endrest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7BD763441C01BD1000429AA6 /* endrest.wav */; };
 		7BD763491C021FF100429AA6 /* finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7BD763481C021FF100429AA6 /* finish.wav */; };
+		B4709F361C3BA53D00678D36 /* Groupinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4709F341C3BA53D00678D36 /* Groupinfo.m */; };
+		B4709F381C3BBC1C00678D36 /* groupcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4709F371C3BBC1C00678D36 /* groupcell.xib */; };
+		B4709F3B1C3BBE6400678D36 /* groupcell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4709F3A1C3BBE6400678D36 /* groupcell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -190,6 +193,11 @@
 		7BD763351C01AD0C00429AA6 /* rest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rest.wav; sourceTree = "<group>"; };
 		7BD763441C01BD1000429AA6 /* endrest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = endrest.wav; sourceTree = "<group>"; };
 		7BD763481C021FF100429AA6 /* finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = finish.wav; sourceTree = "<group>"; };
+		B4709F331C3BA53D00678D36 /* Groupinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Groupinfo.h; sourceTree = "<group>"; };
+		B4709F341C3BA53D00678D36 /* Groupinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Groupinfo.m; sourceTree = "<group>"; };
+		B4709F371C3BBC1C00678D36 /* groupcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = groupcell.xib; sourceTree = "<group>"; };
+		B4709F391C3BBE6400678D36 /* groupcell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = groupcell.h; sourceTree = "<group>"; };
+		B4709F3A1C3BBE6400678D36 /* groupcell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = groupcell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +227,8 @@
 		7BBA93051BE511C3001F8F31 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				B4709F331C3BA53D00678D36 /* Groupinfo.h */,
+				B4709F341C3BA53D00678D36 /* Groupinfo.m */,
 				7B8365D71BF042AA0034728E /* Config.h */,
 				7B8365D81BF042AA0034728E /* Config.m */,
 				7BBA93091BE51274001F8F31 /* DBmanger.h */,
@@ -284,6 +294,9 @@
 				7BD763101BFCCE6B00429AA6 /* PlaySpeak.h */,
 				7BD763111BFCCE6B00429AA6 /* PlaySpeak.m */,
 				7B73797F1C0B20B200174028 /* ver */,
+				B4709F371C3BBC1C00678D36 /* groupcell.xib */,
+				B4709F391C3BBE6400678D36 /* groupcell.h */,
+				B4709F3A1C3BBE6400678D36 /* groupcell.m */,
 			);
 			path = SpeakNumber;
 			sourceTree = "<group>";
@@ -432,6 +445,7 @@
 				7B7379671C0AC6E700174028 /* 17.wav in Resources */,
 				7B73797D1C0AC6E800174028 /* 39.wav in Resources */,
 				7B7379651C0AC6E700174028 /* 15.wav in Resources */,
+				B4709F381C3BBC1C00678D36 /* groupcell.xib in Resources */,
 				7BD7633B1C01AD0C00429AA6 /* 6.wav in Resources */,
 				7B7378EA1C07627200174028 /* appico.png in Resources */,
 				7B7379741C0AC6E700174028 /* 30.wav in Resources */,
@@ -477,8 +491,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B1BB3031C25B878005028CE /* LineProgressLayer.m in Sources */,
+				B4709F3B1C3BBE6400678D36 /* groupcell.m in Sources */,
 				7BBBFCA01BE34C1800EF539B /* SettingViewControl.m in Sources */,
 				7B8365D91BF042AA0034728E /* Config.m in Sources */,
+				B4709F361C3BA53D00678D36 /* Groupinfo.m in Sources */,
 				7BBBFC9A1BE34BD100EF539B /* MainNavigation.m in Sources */,
 				7BBBFCA31BE34C3D00EF539B /* ListViewControl.m in Sources */,
 				7B1BB3041C25B878005028CE /* LineProgressView.m in Sources */,

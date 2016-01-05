@@ -32,9 +32,9 @@
     rightbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(rightclick)];
     navtitle.rightBarButtonItem = rightbtn;
     rightbtn.tintColor =[UIColor whiteColor];
-//    leftbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
-//    leftbtn.tintColor =[UIColor whiteColor];
-//    navtitle.leftBarButtonItem = leftbtn;
+    leftbtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"people"] style:UIBarButtonItemStylePlain target:self action:@selector(leftclick)];
+    leftbtn.tintColor =[UIColor whiteColor];
+    navtitle.leftBarButtonItem = leftbtn;
     
     self.navigationController.navigationBar.translucent =YES;
     self.navigationController.navigationBar.barStyle =UIBarStyleBlackTranslucent;
@@ -294,9 +294,13 @@ void interruptionListenner(void* inClientData, UInt32 inInterruptionState)
             _counts++;
             countslayer.string = [NSString stringWithFormat:@"%d 个",_counts];
             groupslayer.string = [NSString stringWithFormat:@"%D 组",_groups];
+            
+            [db updateGroupinfo:celllabel.text value1:@0
+                         value2:@1];
             break;
         case 10:
-            
+            [db updateGroupinfo:celllabel.text value1:@1
+                         value2:@0];
             [self clickstop:nil];
             break;
         case 11:
@@ -320,6 +324,11 @@ void interruptionListenner(void* inClientData, UInt32 inInterruptionState)
         case 6://休息
             runfloat=0;
             _groups++;
+            
+            [db updateGroupinfo:celllabel.text value1:@1
+                         value2:@0];
+            
+            
              [shapelayer removeAllAnimations];
             shapelayer.strokeEnd=0;
             btnpause.enabled=NO;
@@ -389,9 +398,13 @@ void interruptionListenner(void* inClientData, UInt32 inInterruptionState)
         stepfloat = ((float)1) / (float)config_now->groupincount;
         runfloat = 0;
         playsound.isnormal=isnormal;
-        if (isnormal)
+        if (isnormal){
+            [db CHeckGroupNameInInfotable:celllabel.text];
             [playsound StartThread];
+        }
+        
         else{
+             [db CHeckGroupNameInInfotable:@"计时训练"];
             slider1.enabled=NO;
             [playsound StartThreadForTime:(int)slider1.value];
         }
@@ -626,7 +639,7 @@ void interruptionListenner(void* inClientData, UInt32 inInterruptionState)
 -(void)leftclick
 {
     
-    [self performSegueWithIdentifier:@"preview" sender:self];
+    [self performSegueWithIdentifier:@"list" sender:self];
 }
 
 -(void)rightclick

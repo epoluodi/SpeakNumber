@@ -37,5 +37,6 @@
 -(void)CHeckGroupNameInInfotable:(NSString *)group;
 -(void)updateGroupinfo:(NSString *)group value1:(NSNumber *)value1 value2:(NSNumber *)value2;
 
--(NSArray *)getGroupinfo;
+-(NSArray *)getGroupinfo:(NSString *)group;
+-(NSArray *)getGroupinfoToday;
 @end

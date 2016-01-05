@@ -210,11 +210,19 @@
     return arr;
 }
 
-
--(NSArray *)getGroupinfo
+-(NSArray *)getGroupinfoToday
 {
     NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Groupinfo"];
-//    fetch.predicate=[NSPredicate predicateWithFormat:@"groupname=%@",group];
+//        fetch.predicate=[NSPredicate predicateWithFormat:@"dt=%@",group];
+    fetch.predicate=[NSPredicate predicateWithFormat:@"dt=%@",[self getDT]];
+    NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
+    return arr;
+}
+
+-(NSArray *)getGroupinfo:(NSString *)group
+{
+    NSFetchRequest *fetch=[NSFetchRequest fetchRequestWithEntityName:@"Groupinfo"];
+    fetch.predicate=[NSPredicate predicateWithFormat:@"groupname=%@",group];
 //    fetch.predicate=[NSPredicate predicateWithFormat:@"dt=%@",[self getDT]];
     NSArray *arr=[mangedcontext executeFetchRequest:fetch error:nil];
     return arr;
@@ -317,6 +325,19 @@
         [mangedcontext deleteObject:obj];
     }
     [mangedcontext save:nil];
+    
+    
+    fetch=[NSFetchRequest fetchRequestWithEntityName:@"Groupinfo"];
+        fetch.predicate=[NSPredicate predicateWithFormat:@"groupname=%@",group];
+    
+    arr=[mangedcontext executeFetchRequest:fetch error:nil];
+    for (Groupinfo *obj in arr)
+    {
+        [mangedcontext deleteObject:obj];
+    }
+    [mangedcontext save:nil];
+    
+    
     return ;
 }
 //

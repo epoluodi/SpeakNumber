@@ -317,9 +317,11 @@ void interruptionListenner(void* inClientData, UInt32 inInterruptionState)
             break;
         case 12:
             numberlayer.string = [NSString stringWithFormat:@"%d",*soundid];
-            lineprogressview.animationDuration=0.7;
+            lineprogressview.animationDuration=0.5;
             [lineprogressview FormCompleted:runfloat *80 toComplete:(runfloat + (float)((float)1 / slider1.value))*80 animated:YES];
             runfloat =runfloat + (float)((float)1 / slider1.value);
+            [db updateGroupinfo:@"计时训练" value1:@0
+                         value2:@1];
             break;
         case 6://休息
             runfloat=0;

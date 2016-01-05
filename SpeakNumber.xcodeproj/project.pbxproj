@@ -82,6 +82,8 @@
 		7BD763431C01AD0C00429AA6 /* rest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7BD763351C01AD0C00429AA6 /* rest.wav */; };
 		7BD763451C01BD1000429AA6 /* endrest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7BD763441C01BD1000429AA6 /* endrest.wav */; };
 		7BD763491C021FF100429AA6 /* finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7BD763481C021FF100429AA6 /* finish.wav */; };
+		7BF2230A1C3C0D0700A51A98 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF223071C3C0D0700A51A98 /* FSLineChart.m */; };
+		7BF2230B1C3C0D0700A51A98 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF223091C3C0D0700A51A98 /* UIColor+FSPalette.m */; };
 		B4709F361C3BA53D00678D36 /* Groupinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4709F341C3BA53D00678D36 /* Groupinfo.m */; };
 		B4709F381C3BBC1C00678D36 /* groupcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4709F371C3BBC1C00678D36 /* groupcell.xib */; };
 		B4709F3B1C3BBE6400678D36 /* groupcell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4709F3A1C3BBE6400678D36 /* groupcell.m */; };
@@ -193,6 +195,10 @@
 		7BD763351C01AD0C00429AA6 /* rest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rest.wav; sourceTree = "<group>"; };
 		7BD763441C01BD1000429AA6 /* endrest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = endrest.wav; sourceTree = "<group>"; };
 		7BD763481C021FF100429AA6 /* finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = finish.wav; sourceTree = "<group>"; };
+		7BF223061C3C0D0700A51A98 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
+		7BF223071C3C0D0700A51A98 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
+		7BF223081C3C0D0700A51A98 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
+		7BF223091C3C0D0700A51A98 /* UIColor+FSPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FSPalette.m"; sourceTree = "<group>"; };
 		B4709F331C3BA53D00678D36 /* Groupinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Groupinfo.h; sourceTree = "<group>"; };
 		B4709F341C3BA53D00678D36 /* Groupinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Groupinfo.m; sourceTree = "<group>"; };
 		B4709F371C3BBC1C00678D36 /* groupcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = groupcell.xib; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 		7BBBFC801BE3428D00EF539B /* SpeakNumber */ = {
 			isa = PBXGroup;
 			children = (
+				7BF223051C3C0CF000A51A98 /* FSLineChart */,
 				7B1BB2FE1C25B864005028CE /* lineprocess */,
 				7B0BC8F91BFB8D01001276D9 /* libstdc++.tbd */,
 				7BD763131C00BD1400429AA6 /* AVFoundation.framework */,
@@ -362,6 +369,17 @@
 				7BD763171C00C77800429AA6 /* backaudio.m4a */,
 			);
 			name = audio;
+			sourceTree = "<group>";
+		};
+		7BF223051C3C0CF000A51A98 /* FSLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				7BF223061C3C0D0700A51A98 /* FSLineChart.h */,
+				7BF223071C3C0D0700A51A98 /* FSLineChart.m */,
+				7BF223081C3C0D0700A51A98 /* UIColor+FSPalette.h */,
+				7BF223091C3C0D0700A51A98 /* UIColor+FSPalette.m */,
+			);
+			name = FSLineChart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,6 +514,7 @@
 				7B8365D91BF042AA0034728E /* Config.m in Sources */,
 				B4709F361C3BA53D00678D36 /* Groupinfo.m in Sources */,
 				7BBBFC9A1BE34BD100EF539B /* MainNavigation.m in Sources */,
+				7BF2230A1C3C0D0700A51A98 /* FSLineChart.m in Sources */,
 				7BBBFCA31BE34C3D00EF539B /* ListViewControl.m in Sources */,
 				7B1BB3041C25B878005028CE /* LineProgressView.m in Sources */,
 				7BD763121BFCCE6B00429AA6 /* PlaySpeak.m in Sources */,
@@ -503,6 +522,7 @@
 				7B84BE571BEA5D270091FC7D /* PreSvaeView.m in Sources */,
 				7BBA93081BE511EE001F8F31 /* settingdb.xcdatamodeld in Sources */,
 				7BBA931F1BE65470001F8F31 /* ASValueTrackingSlider.m in Sources */,
+				7BF2230B1C3C0D0700A51A98 /* UIColor+FSPalette.m in Sources */,
 				7BBA931E1BE65470001F8F31 /* ASValuePopUpView.m in Sources */,
 				7BBA930B1BE51274001F8F31 /* DBmanger.m in Sources */,
 				7BBA93191BE65422001F8F31 /* MBProgressHUD.m in Sources */,

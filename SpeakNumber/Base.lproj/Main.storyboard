@@ -229,23 +229,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4f-OO-PJu">
+                                <rect key="frame" x="0.0" y="374" width="320" height="194"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="194" id="ah5-JO-fKT"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l8l-zV-QG3">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="302"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WJw-tk-vM1" firstAttribute="top" secondItem="l8l-zV-QG3" secondAttribute="bottom" id="Ajk-d3-dJg"/>
-                            <constraint firstItem="l8l-zV-QG3" firstAttribute="leading" secondItem="Bs5-mX-jgi" secondAttribute="leading" id="GZJ-65-OjB"/>
-                            <constraint firstAttribute="trailing" secondItem="l8l-zV-QG3" secondAttribute="trailing" id="Mda-qV-LED"/>
-                            <constraint firstItem="l8l-zV-QG3" firstAttribute="top" secondItem="Xla-pM-Aob" secondAttribute="bottom" id="Q3r-Up-UQD"/>
+                            <constraint firstItem="l8l-zV-QG3" firstAttribute="leading" secondItem="Bs5-mX-jgi" secondAttribute="leading" id="KSr-ka-4iR"/>
+                            <constraint firstItem="WJw-tk-vM1" firstAttribute="top" secondItem="y4f-OO-PJu" secondAttribute="bottom" id="OXg-cA-e4e"/>
+                            <constraint firstAttribute="trailing" secondItem="l8l-zV-QG3" secondAttribute="trailing" id="OxG-to-M04"/>
+                            <constraint firstItem="l8l-zV-QG3" firstAttribute="top" secondItem="Xla-pM-Aob" secondAttribute="bottom" id="YNx-rf-dxV"/>
+                            <constraint firstItem="y4f-OO-PJu" firstAttribute="top" secondItem="l8l-zV-QG3" secondAttribute="bottom" constant="8" id="otb-Km-ZXM"/>
+                            <constraint firstAttribute="trailing" secondItem="y4f-OO-PJu" secondAttribute="trailing" id="pjM-Zg-ID4"/>
+                            <constraint firstItem="y4f-OO-PJu" firstAttribute="leading" secondItem="Bs5-mX-jgi" secondAttribute="leading" id="qsC-qu-HCP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="KtP-bX-nfO"/>
                     <connections>
                         <outlet property="navtitle" destination="KtP-bX-nfO" id="NkL-Ea-jiR"/>
                         <outlet property="table" destination="l8l-zV-QG3" id="oZe-25-2VI"/>
+                        <outlet property="viewchart" destination="y4f-OO-PJu" id="n5h-8b-emg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DE5-MH-olu" userLabel="First Responder" sceneMemberID="firstResponder"/>

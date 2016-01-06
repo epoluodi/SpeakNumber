@@ -130,7 +130,7 @@
 {
     NSMutableArray *marry = [[NSMutableArray alloc] init];
     for (int i=0; i<[allgrouplist count]; i++) {
-        [marry addObject:((Groupinfo *)allgrouplist[0]).counts];
+        [marry addObject:((Groupinfo *)allgrouplist[i]).counts];
         
     }
     

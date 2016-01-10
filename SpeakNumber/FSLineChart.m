@@ -147,7 +147,7 @@
     
     float scale = 1.0f;
     int q = (int)_data.count / _gridStep;
-    scale = (CGFloat)(q * _gridStep) / (CGFloat)(_data.count - 1);
+    scale = (CGFloat)(q * _gridStep) / (((CGFloat)(_data.count - 1) == 0)?1:(CGFloat)(_data.count - 1));
     
     // draw grid
     for(int i=0;i<_gridStep;i++) {
